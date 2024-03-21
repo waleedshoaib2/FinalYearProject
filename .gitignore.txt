@@ -1,0 +1,3 @@
+documentations
+node_modules
+notthereal
