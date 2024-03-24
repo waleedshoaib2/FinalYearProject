@@ -2,15 +2,15 @@ import express from "express";
 import {
   stripeCheckOut,
   stripeWebHook,
-} from "../controller/stripeController.js";
-import { protect } from "../middleware/authMiddleware.js";
+} from "../controllers/stripeController.js";
+import { checkAuth } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post(
   "/create-checkout-session",
   express.json(),
-  protect,
+  checkAuth,
   stripeCheckOut
 );
 

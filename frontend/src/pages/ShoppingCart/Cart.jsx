@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Cart({ cartItems }) {
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   function deleteHandler(id) {
@@ -17,7 +18,7 @@ export default function Cart({ cartItems }) {
         addToCart(
           {
             ...product,
-            images: [product.image],
+            images: [product.images],
           },
           count
         )
@@ -25,6 +26,7 @@ export default function Cart({ cartItems }) {
     }
   }
 
+  console.log(cartItems);
   return (
     <div className="shoppingCart__container">
       {cartItems.length === 0 ? (

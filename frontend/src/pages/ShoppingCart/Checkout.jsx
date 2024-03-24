@@ -8,6 +8,7 @@ export default function Checkout({ cartItems }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let { userInfo } = useSelector((state) => state.user);
+  console.log(userInfo);
 
   function checkoutHandler(e) {
     e.preventDefault();
