@@ -32,10 +32,9 @@ import AdminCategoryList from "./pages/AdminCategorylist/AdminCategoryList";
 import AdminCreateCategory from "./pages/AdminCreateCategory/index";
 import AdminEditCategory from "./pages/AdminCategoryEdit";
 import AdminNewsletter from "./pages/AdminNewsletter";
-
+import Newsletter from "./pages/Newsletter";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
 function App() {
   React.useEffect(() => {
     AOS.init();
@@ -49,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
+          <Route path="/newsletter" element={<Newsletter />} />
 
           <Route path="/" element={<Home />} />
           <Route path="/newarrivals" element={<NewArrivals />} />
@@ -70,6 +70,7 @@ function App() {
             <Route path="/admin/userlist" element={<AdminUserList />} />
             <Route path="/admin/editUser/:id" element={<AdminEditUser />} />
             <Route path="/admin/productlist/" element={<AdminProductList />} />
+
             <Route
               path="/admin/categorylist/"
               element={<AdminCategoryList />}

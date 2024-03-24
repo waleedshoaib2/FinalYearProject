@@ -7,7 +7,7 @@ import Order from "../models/orderModel.js";
 const stripeCheckOut = async (req, res) => {
   try {
     const { orderItems, customerID } = req.body;
-    console.log(req.body)
+    console.log("ider ho: ", req.body);
 
     let metaDatas = {};
     let itemsList = [];
@@ -32,15 +32,13 @@ const stripeCheckOut = async (req, res) => {
       line_items: itemsList,
       mode: "payment",
       payment_method_types: ["card"],
-      client_reference_id: customerID, 
+      client_reference_id: customerID,
       success_url: `http://localhost:3000/successPayment`,
       cancel_url: `http://localhost:3000/cart`,
       shipping_address_collection: {
         allowed_countries: ["US", "CA"],
       },
-      shipping_options: [
-        { shipping_rate: "shr_1OspR4LeR7Utp3pwoc9w3PuZ" },
-      ],
+      shipping_options: [{ shipping_rate: "shr_1OspR4LeR7Utp3pwoc9w3PuZ" }],
       metadata: metaDatas,
     });
 

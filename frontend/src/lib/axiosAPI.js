@@ -243,7 +243,7 @@ export const adminDeleteUser = async (userInfo, id) => {
 export const addProductComment = async (userInfo, id, formData) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${userInfo.token}`, // Assuming 'Authorization' header is needed
+      Authorization: `Bearer ${userInfo.token}`,
     },
   };
   return await axios.post(

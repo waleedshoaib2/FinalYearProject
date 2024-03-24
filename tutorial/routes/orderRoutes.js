@@ -7,17 +7,23 @@ import {
   deleteOrderById,
 } from "../controllers/orderController.js";
 
-import { protect, admin, declineDemo } from "../middlewares/authMiddleware.js";
+import { checkAuth, isAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 // user route
-router.get("/myorders", protect, getAllMyOrders);
-router.get("/:id", protect, getOrderItems);
+router.get("/myorders", checkAuth, isAdmin, getAllMyOrders);
+router.get("/:id", checkAuth, isAdmin, getOrderItems);
 
 // admin route
-router.get("/", protect, admin, getAllOrders);
-router.delete("/:id", protect, admin, declineDemo, deleteOrderById);
-router.put("/:id/deliver", protect, admin, declineDemo, updateOrderToDelivered);
+router.get("/", checkAuth, isAdmin, getAllOrders);
+router.delete("/:id", checkAuth, isAdmin, deleteOrderById);
+router.put(
+  "/:id/deliver",
+  checkAuth,
+  isAdmin,
+
+  updateOrderToDelivered
+);
 
 export default router;

@@ -1,32 +1,25 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Email submitted:", email);
-    setSubmitted(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/newsletter/"
+      );
+    } catch (error) {
+      console.error("Error sending request:", error);
+    }
   };
 
   return (
     <div>
-      {submitted ? (
-        <p>Thank you for subscribing!</p>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Enter your email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <button type="submit">Subscribe</button>
-        </form>
-      )}
+      <button onClick={handleSubmit}>Send the Newsletter </button>
     </div>
   );
 };

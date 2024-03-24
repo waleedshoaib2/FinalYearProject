@@ -51,7 +51,7 @@ export const logout = () => {
     dispatch(userLogout());
   };
 };
-export const register = (name, email, password) => {
+export const register = (name, email, password, phoneNumber, address) => {
   return async (dispatch) => {
     try {
       dispatch(resetUserState());
@@ -64,8 +64,8 @@ export const register = (name, email, password) => {
       };
 
       const { data } = await axios.post(
-        `http://localhost:4000/api/users/`,
-        { name, email, password },
+        `http://localhost:4000/user/signup/`,
+        { name, email, password, phoneNumber, address },
         config
       );
 

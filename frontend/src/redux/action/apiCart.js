@@ -10,7 +10,7 @@ export const addToCart = (product, qty) => {
       cartAddItem({
         _id: product._id,
         name: product.name,
-        image: product.images[0],
+        image: product.image,
         price: product.price,
         qty: qty,
       })

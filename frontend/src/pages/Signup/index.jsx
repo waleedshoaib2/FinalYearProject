@@ -20,6 +20,8 @@ export default function SignupPage() {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [message, setMessage] = React.useState(null);
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [address, setAddress] = React.useState("");
 
   // get query param
   const [searchParams] = useSearchParams();
@@ -43,7 +45,7 @@ export default function SignupPage() {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(name, email, password, phoneNumber, address));
     }
   }
 
@@ -51,7 +53,7 @@ export default function SignupPage() {
     <div className="auth">
       <Meta title="Sign Up" />
       <DisplayPending pending={pending} />
-     
+
       <form className="auth__container" onSubmit={registerHandler}>
         {message ? (
           <Alert severity="error">{message}</Alert>
@@ -95,6 +97,25 @@ export default function SignupPage() {
             id="register_confirm_password"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="auth__input__container">
+          <label htmlFor="register_phonenumber">Phone Number</label>
+          <input
+            id="register_phonenumber"
+            type="text"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="auth__input__container">
+          <label htmlFor="register_address">Address</label>
+          <input
+            id="register_address"
+            type="text"
+            onChange={(e) => setAddress(e.target.value)}
             required
           />
         </div>

@@ -7,6 +7,7 @@ import {
   logout,
   profile,
   getAllUsers,
+  news,
   updatePassword,
 } from "../controllers/userController.js";
 const router = express.Router();
@@ -14,7 +15,7 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", logout);
-
+router.post("/newsletter", checkAuth, news);
 // Protected routes
 router.get("/profile", checkAuth, profile);
 

@@ -7,11 +7,14 @@ import "./config/passport.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
-import cartRoutes from "./routes/cartRoutes.js"
-import reviewRoutes from "./routes/reviewRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js";
+import stripeRoutes from "./routes/stripeRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 import { Server } from "socket.io";
 
-const app = express(); 
+import newsletterRoutes from "./routes/newsletterRoutes.js";
+
+const app = express();
 app.use(express.json());
 
 connectDb();
@@ -22,8 +25,10 @@ app.use("/product", productRoutes);
 app.use("/user", userRoutes);
 app.use("/chat", chatRoutes);
 app.use("/categories", categoryRoutes);
-app.use('/reviews', reviewRoutes);
-app.use("/cart", cartRoutes); 
+app.use("/reviews", reviewRoutes);
+app.use("/stripe", stripeRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/newsletter", newsletterRoutes);
 
 const httpServer = app.listen(4000, () => {
   console.log("Server is running at http://localhost:4000");
@@ -31,10 +36,11 @@ const httpServer = app.listen(4000, () => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000", 
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
+// sendNewsletters();
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);

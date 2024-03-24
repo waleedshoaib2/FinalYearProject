@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  newsletterSubscribed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model("User", UserSchema);

@@ -3,8 +3,8 @@ import "../config/passport.js";
 export const checkAuth = passport.authenticate("jwt", { session: false });
 
 export const isAdmin = (req, res, next) => {
-  console.log("idher yolo " , req)
-  
+  // console.log("idher yolo " , req)
+
   if (req.user.isAdmin) {
     return next();
   }

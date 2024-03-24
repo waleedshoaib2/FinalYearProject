@@ -5,6 +5,25 @@ import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
 dotenv.config(); // Add this at the top of your controller file
+
+export const news = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.newsletterSubscribed = true;
+    await user.save(); // Save changes to the database
+
+    res.status(200).json({ message: "Newsletter subscription updated" }); // More accurate status code
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -28,9 +47,16 @@ export const login = async (req, res, next) => {
       { expiresIn: "2h" }
     );
 
-    const newuser = {...user, token}
+    const newuser = { ...user, token };
 
-    res.json({ name : user.name , email: user.email, phoneno: user.phoneNumber, address : user.address, isAdmin:user.isAdmin ,token: token});
+    res.json({
+      name: user.name,
+      email: user.email,
+      phoneno: user.phoneNumber,
+      address: user.address,
+      isAdmin: user.isAdmin,
+      token: token,
+    });
   } catch (error) {
     next(error);
   }
